@@ -2,16 +2,8 @@ package estructuras
 
 import (
 	"fmt"
+	"strconv"
 )
-
-//Nodo de la lista simple de empleados
-type Nodo_Empleado struct {
-	id string
-	nombre   string
-	cargo string
-	password string
-	siguiente *Nodo_Empleado
-}
 
 //Estructura de la lista simple de empleados
 type ListaEmpleados struct {
@@ -45,4 +37,25 @@ func(l *ListaEmpleados) MostrarLista(){
 		fmt.Println("ID: ", aux.id, " Nombre: ", aux.nombre, " Cargo: ", aux.cargo, " Password: ", aux.password)
 		aux = aux.siguiente
 	}
+}
+
+func(l *ListaEmpleados) GenererarGraphvizEmpleado() string{
+	texto := "digraph ListaEmpleados {\n"
+	contador := 0
+	aux := l.Inicio
+	if aux != nil {
+		for aux != nil {
+			texto += strconv.Itoa(contador) + "[label = \"" + aux.nombre + ", " + aux.cargo + "\"];\n"
+			contador++
+			aux = aux.siguiente
+		}
+		for i := 0; i < contador-1; i++ {
+			texto += strconv.Itoa(i) + "->" + strconv.Itoa(i+1) + ";\n"
+		}
+		
+	}else{
+		texto += "ListaEmpleadosVacia[label = \"Lista de Empleados Vacia\"];\n"
+	}
+	texto += "}"
+	return texto
 }

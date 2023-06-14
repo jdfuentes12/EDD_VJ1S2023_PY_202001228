@@ -1,0 +1,151 @@
+//package estructura
+
+import(
+	"strconv"
+)
+//nodo de la matriz dispersa
+
+type NodoMatriz struct {
+	siguiente *NodoMatriz
+	anterior  *NodoMatriz
+	arriba    *NodoMatriz
+	abajo     *NodoMatriz
+	posX	  int
+	posY	  int
+	color	 string
+}
+
+//estructura de la matriz dispersa
+type MatrizDispersa struct {
+	raiz *NodoMatriz
+}
+
+func (m *MatrizDispersa) buscarC(x int)*NodoMatriz{
+	aux := m.raiz
+	for aux != nil {
+		if aux.posX == x {
+			return aux
+		}
+		aux = aux.siguiente
+	}
+	return nil
+}
+	
+func (m *MatrizDispersa) buscarF(y int)*NodoMatriz{
+	aux := m.raiz
+	for aux != nil {
+		if aux.posY == y {
+			return aux
+		}
+		aux = aux.abajo
+	}
+	return nil
+}
+
+func (m *MatrizDispersa) insetarColumna(nuevoNodo *NodoMatriz, nodoRaiz *NodoMatriz) *NodoMatriz{
+	temp := nodoRaiz
+	piv := true
+	for {
+		if temp.posX == nuevoNodo.posX {
+			temp.posY = nuevoNodo.posY
+			temp.color = nuevoNodo.color
+			return temp
+		}else if temp.posX > nuevoNodo.posX {
+			piv = true
+			break
+		}
+		if temp.siguiente != nil {
+			temp = temp.siguiente
+		}else{
+			break
+		}
+	}
+	if piv{
+		nuevoNodo.siguiente = temp
+		temp.anterior.siguiente = nuevoNodo
+		nuevoNodo.anterior = temp.anterior
+		temp.anterior = nuevoNodo
+	}else{
+		temp.siguiente = nuevoNodo
+		nuevoNodo.anterior = temp
+	}
+	return nuevoNodo
+}
+
+func (m *MatrizDispersa) insetarFila(nuevoNodo *NodoMatriz, nodoRaiz *NodoMatriz) *NodoMatriz{
+	temp := nodoRaiz
+	piv := true
+	for {
+		if temp.posX == nuevoNodo.posX {
+			temp.posY = nuevoNodo.posY
+			temp.color = nuevoNodo.color
+			return temp
+		}else if temp.posX > nuevoNodo.posX {
+			piv = true
+			break
+		}
+		if temp.siguiente != nil {
+			temp = temp.siguiente
+		}else{
+			break
+		}
+	}
+	if piv{
+		nuevoNodo.siguiente = temp
+		temp.anterior.siguiente = nuevoNodo
+		nuevoNodo.anterior = temp.anterior
+		temp.anterior = nuevoNodo
+	}else{
+		temp.siguiente = nuevoNodo
+		nuevoNodo.anterior = temp
+	}
+	return nuevoNodo
+}
+
+
+func (m *MatrizDispersa) nuevaColumna(x int) *NodoMatriz{
+	col := "C"+strconv.Itoa(x)
+	nuevoNodo := &NodoMatriz{posX: x, posY: -1, color: col}
+	columna := m.insetarColumna(nuevoNodo, m.raiz)
+	return columna
+}
+
+func (m *MatrizDispersa) nuevaFila(y int) *NodoMatriz{
+	col := "F"+strconv.Itoa(y)
+	nuevoNodo := &NodoMatriz{posX: -1, posY: y, color: col}
+	fila := m.insetarFila(nuevoNodo, m.raiz)
+	return fila
+}
+
+func (m *MatrizDispersa) Insertar_Elemento(x int, y int, color string){
+	nuevoNodo := &NodoMatriz{posX: x, posY: y, color: color}
+	nodoColumna := m.buscarC(x)
+	nodoFila := m.buscarF(y)
+	/*
+	1. columna y fila no exiten
+	2. columna si existe y fila no
+	3. columna no existe y fila si
+	4. columna y fila si existen
+	*/
+	if nodoColumna == nil && nodoFila == nil {
+		//caso 1
+		fmt.Println("caso 1")
+		nodoColumna = m.nuevaColumna(x)
+		nodoFila = m.nuevaFila(y)
+		nuevoNodo = m.insetarColumna(nuevoNodo, nodoColumna)
+		nuevoNodo = m.insetarFila(nuevoNodo, nodoFila)
+	}else if nodoColumna != nil && nodoFila == nil {
+		//caso 2
+		fmt.Println("caso 2")
+		nodoFila = m.nuevaFila(y)
+		nuevoNodo = m.insetarColumna(nuevoNodo, nodoColumna)
+		nuevoNodo = m.insetarFila(nuevoNodo, nodoFila)
+	}
+	else if nodoColumna == nil && nodoFila != nil {
+		//caso 3
+		fmt.Println("caso 3")
+		nodoColumna = m.nuevaColumna(x)
+		nuevoNodo = m.insetarColumna(nuevoNodo, nodoColumna)
+		nuevoNodo = m.insetarFila(nuevoNodo, nodoFila)
+	}
+}
