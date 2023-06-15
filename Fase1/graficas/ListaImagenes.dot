@@ -1,0 +1,3 @@
+digraph ListaEmpleados {
+ListaEmpleadosVacia[label = "Lista de Empleados Vacia"];
+}

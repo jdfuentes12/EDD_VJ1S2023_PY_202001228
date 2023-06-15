@@ -5,11 +5,11 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"os"
 	"os/exec"
-	"io/ioutil"
 	"time"
 )
 
@@ -56,7 +56,6 @@ func sesion() {
 		fmt.Println("Usuario o contraseña incorrectos")
 		main()
 	}
-
 }
 
 func menuAdmin() {
@@ -66,7 +65,8 @@ func menuAdmin() {
 	fmt.Println("3. Cargar Clientes")
 	fmt.Println("4. Actualizar Cola")
 	fmt.Println("5. Reportes Estructuras")
-	fmt.Println("6. Salir")
+	fmt.Println("6. Atender cliente en la Cola")
+	fmt.Println("7. Salir")
 	fmt.Println("Elige una opcion: ")
 	opcion := 0
 	fmt.Scanln(&opcion)
@@ -79,7 +79,11 @@ func menuAdmin() {
 		cargarClientes()
 	case 4:
 		actualizarCola()
+	case 5:
+		Reportes()
 	case 6:
+		menuColaClientes()
+	case 7:
 		fmt.Println("Saliendo del modo administrador")
 		main()
 
@@ -153,7 +157,7 @@ func cargarClientes() {
 
 func cargarImagen() {
 	fmt.Println("----------Cargar Imagen----------")
-	f,err := os.Open("archivos\\imagenes.csv")
+	f, err := os.Open("archivos\\imagenes.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -177,7 +181,7 @@ func cargarImagen() {
 		capa := record[1]
 		ListaImagenes.Insertar(imagen, capa)
 	}
-	
+
 	fmt.Println("Caga de Imagenes Exitosa\n")
 	menuAdmin()
 }
@@ -208,7 +212,65 @@ func actualizarCola() {
 	}
 	fmt.Println("Clientes Ingresados a la cola\n")
 	menuColaClientes()
+}
+
+func menuColaClientes() {
+	id := colaClientes.RetornarID()
+	nombre := colaClientes.RetornarNombre()
+	fmt.Println("----------Cola de Clientes----------")
+	fmt.Println("1. Atender al cliente con id: ", id, " y nombre: ", nombre)
+	fmt.Println("2. Salir")
+	fmt.Println("Elige una opcion: ")
+	opcion := 0
+	fmt.Scanln(&opcion)
+	switch opcion {
+	case 1:
+		fmt.Println("Cliente Atendido\n")
+		if id == "X" {
+			idNuevo := generateRandomID(4)
+			listaClientes.Insertar(idNuevo, nombre)
+		}
+		colaClientes.Desencolar()
+		menuColaClientes()
+	case 2:
+		fmt.Println("Saliendo de la cola de clientes\n")
+		menuAdmin()
+	}
+}
+
+func Reportes() {
+	texto := listaEmpleados.GenererarGraphvizEmpleado()
+	guardarGraphviz("ListaEmpleados", texto)
+	texto1 := listaClientes.GenererarGraphvizCliente()
+	guardarGraphviz("ListaClientes", texto1)
+	texto2 := ListaImagenes.GenererarGraphvizImagenes()
+	guardarGraphviz("ListaImagenes", texto2)
+	texto3 := colaClientes.GenererarGraphvizCola()
+	guardarGraphviz("ColaClientes", texto3)
 	menuAdmin()
+}
+
+func guardarGraphviz(nombre string, texto string) {
+	archivo, err := os.Create("graficas\\" + nombre + ".dot")
+	if err != nil {
+		fmt.Println("Error al crear el archivo.\n", err)
+		return
+	}
+	defer archivo.Close()
+	_, err = archivo.WriteString(texto)
+	if err != nil {
+		fmt.Println("Error al escribir en el archivo:", err)
+		return
+	}
+	ejecutarDot("graficas\\"+nombre+".jpg", "graficas\\"+nombre+".dot")
+	fmt.Println("Archivo guardado correctamente.\n")
+}
+
+func ejecutarDot(nombre string, archivo_dot string) {
+	path, _ := exec.LookPath("dot")
+	cmd, _ := exec.Command(path, "-Tjpg", archivo_dot).Output()
+	mode := 0777
+	_ = ioutil.WriteFile(nombre, cmd, os.FileMode(mode))
 }
 
 func generateRandomID(length int) string {
@@ -221,57 +283,10 @@ func generateRandomID(length int) string {
 	for i := range id {
 		id[i] = charset[rand.Intn(len(charset))]
 	}
+
+	valor := listaClientes.BuscarClienteId(string(id))
+	if valor == true {
+		generateRandomID(4)
+	}
 	return string(id)
-}
-
-func menuColaClientes(){
-	fmt.Println("----------Cola de Clientes----------")
-	colaClientes.mostrarcliente()
-	fmt.Println("1. Atender Cliente")
-	fmt.Println("2. Salir")
-	fmt.Println("Elige una opcion: ")
-	opcion := 0
-	fmt.Scanln(&opcion)
-	switch opcion {
-	case 1:
-		fmt.Println("Cliente Atendido")
-		colaClientes.Desencolar()
-		colaClientes.MostrarCola()
-		menuColaClientes()
-	case 2:
-		fmt.Println("Saliendo de la cola de clientes")
-		menuAdmin()
-	}
-}
-
-func Reportes(){
-	texto := listaEmpleados.GenererarGraphvizEmpleado()
-	guardarGraphviz("ListaEmpleados", texto)
-	texto1 := listaClientes.GenererarGraphvizCliente()
-	guardarGraphviz("ListaClientes", texto1)
-	texto2 := ListaImagenes.GenererarGraphvizImagenes()
-	guardarGraphviz("ListaImagenes", texto2)
-}
-
-func guardarGraphviz(nombre string, texto string) {
-	archivo, err := os.Create("graficas\\" + nombre + ".dot")
-	if err != nil {
-		fmt.Println("Error al crear el archivo.\n",err)
-		return
-	}
-	defer archivo.Close()
-	_, err = archivo.WriteString(texto)
-	if err != nil {
-		fmt.Println("Error al escribir en el archivo:", err)
-		return
-	}
-	ejecutarDot("graficas\\" + nombre + ".jpg", "graficas\\" + nombre + ".dot")
-	fmt.Println("Archivo guardado correctamente.\n")
-}
-
-func ejecutarDot(nombre string,archivo_dot string){
-	path, _ := exec.LookPath("dot")
-	cmd, _ := exec.Command(path, "-Tjpg", archivo_dot).Output()
-	mode := 0777
-	_ = ioutil.WriteFile(nombre, cmd, os.FileMode(mode))	
 }

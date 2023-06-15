@@ -1,0 +1,15 @@
+digraph ListaClientes {
+node [shape=record, height = 0.5];
+rankdir = LR;
+0[label = "4575, Cristian Suy"];
+1[label = "X, Hector Jimenez"];
+2[label = "6344, Joel Guzman"];
+3[label = "2480, Karen Garcia"];
+4[label = "X, Teodoro Mejia"];
+5[label = "5965, Alejandra Perez"];
+0->1;
+1->2;
+2->3;
+3->4;
+4->5;
+}

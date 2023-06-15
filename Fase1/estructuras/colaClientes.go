@@ -11,10 +11,9 @@ type ListaColaClientes struct {
 	Longitud int
 }
 
-
 func (l *ListaColaClientes) Encolar(id string, nombre string) {
 	nuevoCliente := &Nodo_Cola{id: id, nombre: nombre, siguiente: nil}
-	
+
 	if l.Inicio == nil {
 		l.Inicio = nuevoCliente
 		l.Final = nuevoCliente
@@ -24,7 +23,6 @@ func (l *ListaColaClientes) Encolar(id string, nombre string) {
 		l.Final = nuevoCliente
 		l.Longitud++
 	}
-
 }
 
 func (l *ListaColaClientes) Desencolar() {
@@ -36,9 +34,14 @@ func (l *ListaColaClientes) Desencolar() {
 	}
 }
 
-func (l *ListaColaClientes) mostrarcliente(){
+func (l *ListaColaClientes) RetornarID() string {
 	aux := l.Inicio
-	fmt.Println("ID: ",aux.id," Nombre:" ,aux.nombre)
+	return aux.id
+}
+
+func (l *ListaColaClientes) RetornarNombre() string {
+	aux := l.Inicio
+	return aux.nombre
 }
 
 func (l *ListaColaClientes) MostrarCola() {
@@ -52,10 +55,12 @@ func (l *ListaColaClientes) MostrarCola() {
 	}
 }
 
-func (l *ListaColaClientes) GenererarGraphvizCola() string{
+func (l *ListaColaClientes) GenererarGraphvizCola() string {
 	texto := "digraph ListaClientes {\n"
 	contador := 0
-	texto+= "node [shape=record, height = 0.5];\n"
+	texto += "node [shape=record, height = 0.5];\n"
+	texto += "rankdir = LR;\n"
+
 	aux := l.Inicio
 	if aux != nil {
 		for aux != nil {
@@ -69,8 +74,7 @@ func (l *ListaColaClientes) GenererarGraphvizCola() string{
 		for i := 0; i < contador-1; i++ {
 			texto += strconv.Itoa(i) + "->" + strconv.Itoa(i+1) + ";\n"
 		}
-		texto += strconv.Itoa(contador-1) + "->" + strconv.Itoa(0) + ";\n"
-	}else{
+	} else {
 		texto += "ListaClientesVacia[label = \"Lista de Clientes Vacia\"];\n"
 	}
 	texto += "}"

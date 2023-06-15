@@ -1,8 +1,8 @@
 package estructuras
 
 import (
-	"strconv"
 	"fmt"
+	"strconv"
 )
 
 type ListaClientes struct {
@@ -11,9 +11,9 @@ type ListaClientes struct {
 	Longitud int
 }
 
-func (l *ListaClientes) Insertar(id string,nombre string){
+func (l *ListaClientes) Insertar(id string, nombre string) {
 	nuevoCliente := &Nodo_Cliente{id: id, nombre: nombre, siguiente: nil}
-	
+
 	if l.Primero == nil {
 		l.Primero = nuevoCliente
 		l.Ultimo = nuevoCliente
@@ -27,12 +27,26 @@ func (l *ListaClientes) Insertar(id string,nombre string){
 	}
 }
 
+func (l *ListaClientes) BuscarClienteId(id string) bool {
+	aux := l.Primero
+	for {
+		if aux.id == id {
+			return true
+		}
+		aux = aux.siguiente
+		if aux == l.Primero {
+			break
+		}
+	}
+	return false
+}
+
 func (l *ListaClientes) MostrarLista() {
 	if l.Primero == nil {
 		fmt.Println("Lista Vacía")
 	}
 	aux := l.Primero
-	for{
+	for {
 		fmt.Println(aux.id, aux.nombre)
 		aux = aux.siguiente
 		if aux == l.Primero {
@@ -41,10 +55,10 @@ func (l *ListaClientes) MostrarLista() {
 	}
 }
 
-func (l *ListaClientes) GenererarGraphvizCliente() string{
+func (l *ListaClientes) GenererarGraphvizCliente() string {
 	texto := "digraph ListaClientes {\n"
 	contador := 0
-	texto+= "node [shape=record, height = 0.5];\n"
+	texto += "node [shape=record, height = 0.5];\n"
 	aux := l.Primero
 	if aux != nil {
 		for aux != nil {
@@ -59,10 +73,9 @@ func (l *ListaClientes) GenererarGraphvizCliente() string{
 			texto += strconv.Itoa(i) + "->" + strconv.Itoa(i+1) + ";\n"
 		}
 		texto += strconv.Itoa(contador-1) + "->" + strconv.Itoa(0) + ";\n"
-	}else{
+	} else {
 		texto += "ListaClientesVacia[label = \"Lista de Clientes Vacia\"];\n"
 	}
 	texto += "}"
 	return texto
 }
-
