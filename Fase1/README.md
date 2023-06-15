@@ -22,6 +22,13 @@ Este es el modulo el cual contiene parte de las acciones necesarias para realiza
 <br>
 ![image](https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/e61e8643-5632-42df-968e-6886044fe723)
 <br>
+### Lectura de csv
+Se realiza una lectura de los archivos con formato csv los cuales contendran los datos de clientes, empleados y las diferentes imagenes que se daran. 
+<br>
+Por medio de la importacion de "encoding/csv" se pudo realizar la lectura del archivo con extension de "csv" el cual fue establecido para el proyecto. Para ellos se verificara por medio de if si hay algun error a la hora de leer el archivo, si lo hay nos lo dira y si no seguira leyendo el archivo. Por medio de otro if verificara si hay un archivo con ese nombre y si no lo hay nos mostrara error. Despues se procede a leer por linea cada unos de los datos que contiene el archivo por medi de un ciclo for, el cual se iran almacenando en diferentes variables cada dato. Despues se hara la carga a las diferentes estructuras dependiendo de que csv se lea. Se lo mostrara un ejemplo con la lectura de las imagenes.
+<br>
+![image](https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/8227229b-5ec7-4ba7-8450-c0655c2ba574)
+<br>
 
 
 ## Manual Usuario
