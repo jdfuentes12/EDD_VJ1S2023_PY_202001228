@@ -34,8 +34,11 @@ Por medio de la importacion de "encoding/csv" se pudo realizar la lectura del ar
 Se realizara un ejemplo de agregar un dato en este caso una imagen a la estructura de una lista que en este caso es una doblemente enlazada, la cual contendra el  nombre de la imagen y la cantidad de capas que tiene. 
 <br>
 Se le mostrara el nodo de la imagen y como es una doblemente enlazada contiene 2 apuntadores, que es haciea delante y hacia atras.
+<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/ff2a0dc6-a622-4ace-9c9d-4c8b3942dabc" width="450"><br>
+<br>
 Despues de tener el nodo, procedemos a insertar algun valor a nuestra lista doblemente enlazada. Se verifica si no hay algun valor antesmente ingresado y si no lo hay se coloca como el primer dato ahora si ya hay un dato en nuestra lista doblemente enlazada si procede a colocar el nuevo valor como segundo, pero siempre tratando de apuntarse entre ellos y como ultimo, el valor ingresado tiene que ir apuntando al primer valor, y se sigue haciendo este mismo proceso para ingresar cualquier dato.
+<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6b74d27f-7399-4266-8560-2d75d334e5e2" width="750"><br>
 
 
