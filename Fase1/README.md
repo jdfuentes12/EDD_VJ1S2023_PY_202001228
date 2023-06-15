@@ -27,8 +27,16 @@ Se realiza una lectura de los archivos con formato csv los cuales contendran los
 <br>
 Por medio de la importacion de "encoding/csv" se pudo realizar la lectura del archivo con extension de "csv" el cual fue establecido para el proyecto. Para ellos se verificara por medio de if si hay algun error a la hora de leer el archivo, si lo hay nos lo dira y si no seguira leyendo el archivo. Por medio de otro if verificara si hay un archivo con ese nombre y si no lo hay nos mostrara error. Despues se procede a leer por linea cada unos de los datos que contiene el archivo por medi de un ciclo for, el cual se iran almacenando en diferentes variables cada dato. Despues se hara la carga a las diferentes estructuras dependiendo de que csv se lea. Se lo mostrara un ejemplo con la lectura de las imagenes.
 <br>
-![image](https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/8227229b-5ec7-4ba7-8450-c0655c2ba574)
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/8227229b-5ec7-4ba7-8450-c0655c2ba574" width="450"><br>
 <br>
+
+### Agregar Imagenes
+Se realizara un ejemplo de agregar un dato en este caso una imagen a la estructura de una lista que en este caso es una doblemente enlazada, la cual contendra el  nombre de la imagen y la cantidad de capas que tiene. 
+<br>
+Se le mostrara el nodo de la imagen y como es una doblemente enlazada contiene 2 apuntadores, que es haciea delante y hacia atras.
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/ff2a0dc6-a622-4ace-9c9d-4c8b3942dabc" width="450"><br>
+Despues de tener el nodo, procedemos a insertar algun valor a nuestra lista doblemente enlazada. Se verifica si no hay algun valor antesmente ingresado y si no lo hay se coloca como el primer dato ahora si ya hay un dato en nuestra lista doblemente enlazada si procede a colocar el nuevo valor como segundo, pero siempre tratando de apuntarse entre ellos y como ultimo, el valor ingresado tiene que ir apuntando al primer valor, y se sigue haciendo este mismo proceso para ingresar cualquier dato.
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6b74d27f-7399-4266-8560-2d75d334e5e2" width="750"><br>
 
 
 ## Manual Usuario
