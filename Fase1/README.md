@@ -1,4 +1,4 @@
-## Manual Tecnico
+## Manual Técnico
 El programa esta realizado con el lenguaje de Go en su version "go1.20.1", con la herramienta de "graphviz" en su version "8.0.5".
 
 ### Estructura Utilizadas 
@@ -40,6 +40,17 @@ Se le mostrara el nodo de la imagen y como es una doblemente enlazada contiene 2
 Despues de tener el nodo, procedemos a insertar algun valor a nuestra lista doblemente enlazada. Se verifica si no hay algun valor antesmente ingresado y si no lo hay se coloca como el primer dato ahora si ya hay un dato en nuestra lista doblemente enlazada si procede a colocar el nuevo valor como segundo, pero siempre tratando de apuntarse entre ellos y como ultimo, el valor ingresado tiene que ir apuntando al primer valor, y se sigue haciendo este mismo proceso para ingresar cualquier dato.
 <br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6b74d27f-7399-4266-8560-2d75d334e5e2" width="750"><br>
+
+### Rerporte en Ghaphviz
+Para verificar si tenemos datos en nustres estructuras usamos los reportes en graphviz, que despues se convierten en un formato jpg para poder  visualizarlos de mejor manera. A continuacion se lo mostrara el codigo para graficas los diferentes reportes de las estructuras. Realizamos un contador y una variable con el nombre de "texto" que contendra todo lo almacenado para generar el archivo .dot al igual se hace un parseo a string para colocar el contador y poder escribirlo y al macenarlo en la variable "texto". A continuacion se le musestra el codigo.
+<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/636e8362-f08b-4a6c-aeab-03e0a18a64bd" width="650"><br>
+Y se le mostrara el codigo que se usa pra la conversion de "dot" a "jpg".
+<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/2c33d12c-6e89-4f31-8d49-92c767b45b22" width="650"><br>
+Imagen del reporte
+<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/88aae8ca-9d29-48c8-aac7-24e5dad2be73" width="100"><br>
 
 
 ## Manual Usuario
