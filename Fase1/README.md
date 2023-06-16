@@ -61,4 +61,12 @@ Nota: este menu solo permitira iniciar en modo administrador, mas adelante se pe
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6635d4f0-6f72-4282-8cd4-f3cd1a900892" width="350"><br>
 Para poder acceder al modo administrador se usa el usuario "admin_202001228" y la contraseña es "admin" y el cual generara el menu administrado y las acciones que se pueden hacer.<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6afd7d63-1cfe-4c1c-ba02-4660c17a321d" width="350"><br>
-
+A la  hora de elegir cualquiera de las primeras 4 opciones le pedira la ruta del archivo para cargarlo en el sistema y poder hacer las operaciones necesarias y almacenarlos en la estructura. <br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/8fc46aa7-39f0-49ff-b755-c3ae160bf601" width="350"><br>
+Y si se quiere ver el reporte de todas las estructuras que se encuentran en el sistema se elige el numero "5" el cual generara todos los reportes de cada una de las estructuras.<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/0810b536-e940-432f-a695-08ca9a2c7b62" width="350"><br>
+Al salir del menu administrador se le desplegara otro menu, donde podra elegir si quiere seguir como administrado o entrar como empleado al sistema. <br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/f1a6447e-eb75-492f-b028-0a029ba41da1" width="350"><br>
+Si elegimos la opccion de entrar como un usuario, nos pedira  nuestras credenciales, las cueales tenemos que colocar. Si no son correctas repetira el proceso y si son correctas entrará al sistema. <br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/9fde338d-3dde-444c-a88b-5f699c1e9468" width="350"><br>
+Como se puede ver en la imagen anterior solo tiene 3 opciones.  Podra observar las imagenes disponibles en el sistema o puede proceder a atender al cliente que se encuentra en la cola.
