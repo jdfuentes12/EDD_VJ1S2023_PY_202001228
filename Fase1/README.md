@@ -61,3 +61,4 @@ Nota: este menu solo permitira iniciar en modo administrador, mas adelante se pe
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6635d4f0-6f72-4282-8cd4-f3cd1a900892" width="350"><br>
 Para poder acceder al modo administrador se usa el usuario "admin_202001228" y la contraseña es "admin" y el cual generara el menu administrado y las acciones que se pueden hacer.<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6afd7d63-1cfe-4c1c-ba02-4660c17a321d" width="350"><br>
+
