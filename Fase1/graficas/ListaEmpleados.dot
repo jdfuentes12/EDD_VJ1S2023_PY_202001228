@@ -1,3 +1,13 @@
 digraph ListaEmpleados {
-ListaEmpleadosVacia[label = "Lista de Empleados Vacia"];
+0[label = "Cristian Suy, Ventas"];
+1[label = "Hector Jimenez, Ventas"];
+2[label = "Pablo Velasquez, Dise�o"];
+3[label = "Jaquelin Gomez, Dise�o"];
+4[label = "Yadira Ruiz, Dise�o"];
+5[label = "Paula Fuentes, Ventas"];
+0->1;
+1->2;
+2->3;
+3->4;
+4->5;
 }

@@ -17,8 +17,11 @@ var listaEmpleados = &estructuras.ListaEmpleados{Inicio: nil, Longitud: 0}
 var listaClientes = &estructuras.ListaClientes{Primero: nil, Ultimo: nil, Longitud: 0}
 var ListaImagenes = &estructuras.ListaImagenes{Primero: nil, Ultimo: nil}
 var colaClientes = &estructuras.ListaColaClientes{Inicio: nil, Final: nil, Longitud: 0}
+var ListaPila = &estructuras.PilaVitacora{}
+var matriz_csv = &estructuras.Matriz{Raiz: &estructuras.NodoMatriz{PosX: -1, PosY: -1, Color: "RAIZ"}}
 
 func main() {
+
 	salir := false
 
 	for !salir {
@@ -41,7 +44,7 @@ func main() {
 }
 
 func sesion() {
-	fmt.Println("----------Iniciaar Sesión----------")
+	fmt.Println("----------Iniciar Sesión----------")
 	fmt.Println("Ingrese su usuario: ")
 	usuario := ""
 	fmt.Scanln(&usuario)
@@ -65,8 +68,7 @@ func menuAdmin() {
 	fmt.Println("3. Cargar Clientes")
 	fmt.Println("4. Actualizar Cola")
 	fmt.Println("5. Reportes Estructuras")
-	fmt.Println("6. Atender cliente en la Cola")
-	fmt.Println("7. Salir")
+	fmt.Println("6. Salir")
 	fmt.Println("Elige una opcion: ")
 	opcion := 0
 	fmt.Scanln(&opcion)
@@ -82,16 +84,18 @@ func menuAdmin() {
 	case 5:
 		Reportes()
 	case 6:
-		menuColaClientes()
-	case 7:
-		fmt.Println("Saliendo del modo administrador")
-		main()
-
+		fmt.Println("Saliendo del modo administrador\n")
+		seleccionMenu()
 	}
 }
 
 func cargaEmpleados() {
-	f, err := os.Open("archivos\\empleados.csv")
+	fmt.Println("----------Cargar Empleados----------")
+	fmt.Println("Ingrese la ruta del archivo:")
+	ruta := ""
+	fmt.Scanln(&ruta)
+	//f, err := os.Open("archivos\\empleados.csv")
+	f, err := os.Open(ruta)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -125,8 +129,11 @@ func cargaEmpleados() {
 
 func cargarClientes() {
 	fmt.Println("----------Cargar Clientes----------")
-
-	f, err := os.Open("archivos\\clientes_registrados.csv")
+	fmt.Println("Ingrese la ruta del archivo:")
+	ruta := ""
+	fmt.Scanln(&ruta)
+	//f, err := os.Open("archivos\\clientes_registrados.csv")
+	f, err := os.Open(ruta)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -157,7 +164,11 @@ func cargarClientes() {
 
 func cargarImagen() {
 	fmt.Println("----------Cargar Imagen----------")
-	f, err := os.Open("archivos\\imagenes.csv")
+	fmt.Println("Ingrese la ruta del archivo:")
+	ruta := ""
+	fmt.Scanln(&ruta)
+	//f, err := os.Open("archivos\\imagenes.csv")
+	f, err := os.Open(ruta)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -187,7 +198,12 @@ func cargarImagen() {
 }
 
 func actualizarCola() {
-	f, err := os.Open("archivos\\clientes_cola.csv")
+	fmt.Println("----------Actualizar Cola----------")
+	fmt.Println("Ingrese la ruta del archivo:")
+	ruta := ""
+	fmt.Scanln(&ruta)
+	//f, err := os.Open("archivos\\clientes_cola.csv")
+	f, err := os.Open(ruta)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -210,31 +226,37 @@ func actualizarCola() {
 		nombre := record[1]
 		colaClientes.Encolar(id, nombre)
 	}
-	fmt.Println("Clientes Ingresados a la cola\n")
-	menuColaClientes()
+	fmt.Println("Clientes Ingresados a la cola correctamente\n")
+	menuAdmin()
 }
 
 func menuColaClientes() {
 	id := colaClientes.RetornarID()
 	nombre := colaClientes.RetornarNombre()
-	fmt.Println("----------Cola de Clientes----------")
-	fmt.Println("1. Atender al cliente con id: ", id, " y nombre: ", nombre)
-	fmt.Println("2. Salir")
+	fmt.Println("---------- Bienvenido ----------")
+	fmt.Println("1. Mostrar Imagenes en el sistema")
+	fmt.Println("2. Atender al cliente con id: ", id, " y nombre: ", nombre)
+	fmt.Println("3. Salir")
 	fmt.Println("Elige una opcion: ")
 	opcion := 0
 	fmt.Scanln(&opcion)
 	switch opcion {
 	case 1:
-		fmt.Println("Cliente Atendido\n")
+		ListaImagenes.MostrarLista()
+		fmt.Println()
+		menuColaClientes()
+	case 2:
 		if id == "X" {
 			idNuevo := generateRandomID(4)
 			listaClientes.Insertar(idNuevo, nombre)
+			id = idNuevo
 		}
 		colaClientes.Desencolar()
+		atenderCliente(id)
 		menuColaClientes()
-	case 2:
+	case 3:
 		fmt.Println("Saliendo de la cola de clientes\n")
-		menuAdmin()
+		seleccionMenu()
 	}
 }
 
@@ -247,6 +269,9 @@ func Reportes() {
 	guardarGraphviz("ListaImagenes", texto2)
 	texto3 := colaClientes.GenererarGraphvizCola()
 	guardarGraphviz("ColaClientes", texto3)
+	texto4 := ListaPila.GenererarGraphvizPila()
+	guardarGraphviz("PilaVitacora", texto4)
+	fmt.Println("Reportes Generados\n")
 	menuAdmin()
 }
 
@@ -263,7 +288,6 @@ func guardarGraphviz(nombre string, texto string) {
 		return
 	}
 	ejecutarDot("graficas\\"+nombre+".jpg", "graficas\\"+nombre+".dot")
-	fmt.Println("Archivo guardado correctamente.\n")
 }
 
 func ejecutarDot(nombre string, archivo_dot string) {
@@ -289,4 +313,62 @@ func generateRandomID(length int) string {
 		generateRandomID(4)
 	}
 	return string(id)
+}
+
+func seleccionMenu() {
+	fmt.Println("----------Bienvenido----------")
+	fmt.Println("1. Modo Administrador")
+	fmt.Println("2. Modo Usuario")
+	opcion := 0
+	fmt.Scanln(&opcion)
+	switch opcion {
+	case 1:
+		fmt.Println("Modo Administrador\n")
+		sesion()
+	case 2:
+		fmt.Println("Modo Usuario\n")
+		sesionUsuario()
+	}
+}
+
+func sesionUsuario() {
+	fmt.Println("----------Iniciar Sesión----------")
+	fmt.Println("Ingrese su usuario: ")
+	usuario := ""
+	fmt.Scanln(&usuario)
+	fmt.Println("Ingrese su contraseña: ")
+	password := ""
+	fmt.Scanln(&password)
+
+	validar := listaEmpleados.BuscarEmpleado(usuario, password)
+	if validar == true {
+		fmt.Println("Sesión iniciada correctamente\n")
+		menuColaClientes()
+	} else {
+		fmt.Println("Usuario o contraseña incorrectos\n")
+		sesionUsuario()
+	}
+}
+
+func atenderCliente(id string) {
+
+	fmt.Println("Ingrese el nombre de la imagen que desee: ")
+	imagen := ""
+	fmt.Scanln(&imagen)
+	validar := ListaImagenes.Buscar(imagen)
+	if validar == true {
+		ListaPila.Push(id, imagen)
+		//ListaPila.MostrarPila()
+		matriz_csv.LeerInicial("csv/"+imagen+"/inicial.csv", imagen)
+		matriz_csv.Reporte()
+		texto4 := ListaPila.GenererarGraphvizPila()
+		guardarGraphviz("PilaVitacora", texto4)
+		//matriz_csv.GenerarImagen(imagen)
+		fmt.Println()
+		menuColaClientes()
+
+	} else {
+		fmt.Println("La imagen no existe")
+		atenderCliente(id)
+	}
 }

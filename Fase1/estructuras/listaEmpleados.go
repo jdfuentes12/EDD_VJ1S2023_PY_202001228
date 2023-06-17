@@ -5,9 +5,9 @@ import (
 	"strconv"
 )
 
-//Estructura de la lista simple de empleados
+// Estructura de la lista simple de empleados
 type ListaEmpleados struct {
-	Inicio *Nodo_Empleado
+	Inicio   *Nodo_Empleado
 	Longitud int
 }
 
@@ -15,22 +15,21 @@ func (l *ListaEmpleados) estaVacia() bool {
 	return l.Longitud == 0
 }
 
-
 func (l *ListaEmpleados) Insertar(id string, nombre string, cargo string, password string) {
 	if l.estaVacia() {
 		l.Inicio = &Nodo_Empleado{id: id, nombre: nombre, cargo: cargo, password: password, siguiente: nil}
 		l.Longitud++
-	}else{
+	} else {
 		aux := l.Inicio
 		for aux.siguiente != nil {
 			aux = aux.siguiente
 		}
-		aux.siguiente = &Nodo_Empleado{id: id, nombre: nombre, cargo: cargo, password: password,siguiente: nil}
+		aux.siguiente = &Nodo_Empleado{id: id, nombre: nombre, cargo: cargo, password: password, siguiente: nil}
 		l.Longitud++
 	}
 }
 
-func(l *ListaEmpleados) MostrarLista(){
+func (l *ListaEmpleados) MostrarLista() {
 	aux := l.Inicio
 	fmt.Println("Lista de Empleados")
 	for aux != nil {
@@ -39,7 +38,29 @@ func(l *ListaEmpleados) MostrarLista(){
 	}
 }
 
-func(l *ListaEmpleados) GenererarGraphvizEmpleado() string{
+func (l *ListaEmpleados) BuscarEmpleado(id string, password string) bool {
+	aux := l.Inicio
+	for aux != nil {
+		if aux.id == id && aux.password == password {
+			return true
+		}
+		aux = aux.siguiente
+	}
+	return false
+}
+
+func (l *ListaEmpleados) BuscarEmpleadoID(id string) string {
+	aux := l.Inicio
+	for aux != nil {
+		if aux.id == id {
+			return aux.nombre
+		}
+		aux = aux.siguiente
+	}
+	return ""
+}
+
+func (l *ListaEmpleados) GenererarGraphvizEmpleado() string {
 	texto := "digraph ListaEmpleados {\n"
 	contador := 0
 	aux := l.Inicio
@@ -52,8 +73,8 @@ func(l *ListaEmpleados) GenererarGraphvizEmpleado() string{
 		for i := 0; i < contador-1; i++ {
 			texto += strconv.Itoa(i) + "->" + strconv.Itoa(i+1) + ";\n"
 		}
-		
-	}else{
+
+	} else {
 		texto += "ListaEmpleadosVacia[label = \"Lista de Empleados Vacia\"];\n"
 	}
 	texto += "}"

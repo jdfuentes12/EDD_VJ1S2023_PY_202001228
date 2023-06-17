@@ -1,3 +1,6 @@
 digraph ListaEmpleados {
-ListaEmpleadosVacia[label = "Lista de Empleados Vacia"];
+nodo0[label = "letra_r, 2"];
+nodo1[label = "ave, 3"];
+nodo0->nodo1;
+nodo1->nodo0;
 }
