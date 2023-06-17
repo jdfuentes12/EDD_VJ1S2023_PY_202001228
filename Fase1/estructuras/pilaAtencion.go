@@ -1,6 +1,8 @@
 package estructuras
 
 import (
+	"fmt"
+	"os"
 	"strconv"
 )
 
@@ -49,4 +51,32 @@ func (p *PilaVitacora) GenererarGraphvizPila() string {
 	texto += "}"
 
 	return texto
+}
+
+func (p *PilaVitacora) CrearJSON() {
+	texto := "{\n"
+	texto += "	\"Pedidos\": [\n"
+	aux := p.primero
+	for i := 0; i < p.longitud; i++ {
+		texto += "		{\n"
+		texto += "			\"id_cliente\": \"" + aux.id + "\",\n"
+		texto += "			\"imagen\": \"" + aux.imagen + "\"\n"
+		texto += "		},\n"
+		aux = aux.siguiente
+	}
+	texto += "]\n"
+	texto += "}\n"
+	CrearArchivoJSON(string(texto), "./graficas/ReporteJSON.json")
+}
+
+func CrearArchivoJSON(contenido string, nameArchivo string) {
+	archivo, err := os.Create(nameArchivo)
+	if err != nil {
+		fmt.Println(err)
+	}
+	_, err = archivo.WriteString(contenido)
+	if err != nil {
+		fmt.Println(err)
+	}
+	archivo.Close()
 }

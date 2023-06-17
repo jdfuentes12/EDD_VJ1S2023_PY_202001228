@@ -363,6 +363,7 @@ func atenderCliente(id string) {
 		matriz_csv.Reporte()
 		texto4 := ListaPila.GenererarGraphvizPila()
 		guardarGraphviz("PilaVitacora", texto4)
+		ListaPila.CrearJSON()
 		//matriz_csv.GenerarImagen(imagen)
 		fmt.Println()
 		menuColaClientes()

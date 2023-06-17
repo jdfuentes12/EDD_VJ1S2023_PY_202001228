@@ -1,6 +1,6 @@
 digraph PilaVitacora {
-nodo0[label = "9539, letra_r"];
-nodo1[label = "4575, ave"];
+nodo0[label = "4081, ave"];
+nodo1[label = "4575, letra_r"];
 empty[label = "Pila"];
 empty->nodo0;
 nodo0->nodo1;
