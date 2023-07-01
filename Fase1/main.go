@@ -18,9 +18,30 @@ var listaClientes = &estructuras.ListaClientes{Primero: nil, Ultimo: nil, Longit
 var ListaImagenes = &estructuras.ListaImagenes{Primero: nil, Ultimo: nil}
 var colaClientes = &estructuras.ListaColaClientes{Inicio: nil, Final: nil, Longitud: 0}
 var ListaPila = &estructuras.PilaVitacora{}
-var matriz_csv = &estructuras.Matriz{Raiz: &estructuras.NodoMatriz{PosX: -1, PosY: -1, Color: "RAIZ"}}
 
 func main() {
+	var matriz_csv = &estructuras.Matriz{Raiz: &estructuras.NodoMatriz{PosX: -1, PosY: -1, Color: "RAIZ"}}
+	fmt.Println("ingrese la imagen")
+	imagen := ""
+	fmt.Scanln(&imagen)
+	matriz_csv.LeerInicial("csv/"+imagen+"/inicial.csv", imagen)
+
+	// generar imgagen del reporte
+	texto := matriz_csv.Reporte()
+	nombre := "Matriz " + imagen
+
+	// reporte del css
+	texto1 := matriz_csv.GenerarCSS(imagen)
+	guardarCss(imagen, texto1)
+
+	// reporte html
+	texto2 := matriz_csv.GenerarHTML(imagen)
+	guardarHTML(imagen, texto2)
+
+	fmt.Println(nombre)
+	guardarGraphviz(nombre, texto)
+
+	main()
 
 	salir := false
 
@@ -290,6 +311,35 @@ func guardarGraphviz(nombre string, texto string) {
 	ejecutarDot("graficas\\"+nombre+".jpg", "graficas\\"+nombre+".dot")
 }
 
+func guardarCss(nombre string, texto string) {
+	archivo, err := os.Create("vistas\\" + nombre + ".css")
+	if err != nil {
+		fmt.Println("Error al crear el archivo.\n", err)
+		return
+	}
+	defer archivo.Close()
+	_, err = archivo.WriteString(texto)
+	if err != nil {
+		fmt.Println("Error al escribir en el archivo:", err)
+		return
+	}
+
+}
+
+func guardarHTML(nombre string, texto string) {
+	archivo, err := os.Create("vistas\\" + nombre + ".html")
+	if err != nil {
+		fmt.Println("Error al crear el archivo.\n", err)
+		return
+	}
+	defer archivo.Close()
+	_, err = archivo.WriteString(texto)
+	if err != nil {
+		fmt.Println("Error al escribir en el archivo:", err)
+		return
+	}
+}
+
 func ejecutarDot(nombre string, archivo_dot string) {
 	path, _ := exec.LookPath("dot")
 	cmd, _ := exec.Command(path, "-Tjpg", archivo_dot).Output()
@@ -351,18 +401,22 @@ func sesionUsuario() {
 }
 
 func atenderCliente(id string) {
-
+	var matriz_csv = &estructuras.Matriz{Raiz: &estructuras.NodoMatriz{PosX: -1, PosY: -1, Color: "RAIZ"}}
 	fmt.Println("Ingrese el nombre de la imagen que desee: ")
 	imagen := ""
 	fmt.Scanln(&imagen)
 	validar := ListaImagenes.Buscar(imagen)
-	if validar == true {
+	if validar {
 		ListaPila.Push(id, imagen)
 		//ListaPila.MostrarPila()
 		matriz_csv.LeerInicial("csv/"+imagen+"/inicial.csv", imagen)
-		matriz_csv.Reporte()
+		// generar imgagen del reporte
+		texto := matriz_csv.Reporte()
+		guardarGraphviz("Matriz", texto)
+
 		texto4 := ListaPila.GenererarGraphvizPila()
 		guardarGraphviz("PilaVitacora", texto4)
+
 		ListaPila.CrearJSON()
 		//matriz_csv.GenerarImagen(imagen)
 		fmt.Println()

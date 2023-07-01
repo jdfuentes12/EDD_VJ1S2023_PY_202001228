@@ -1,6 +1,30 @@
 digraph ListaEmpleados {
 nodo0[label = "letra_r, 2"];
 nodo1[label = "ave, 3"];
+nodo2[label = "bmo, 3"];
+nodo3[label = "corrin, 3"];
+nodo4[label = "deadpool, 4"];
+nodo5[label = "hora_de_aventura, 4"];
+nodo6[label = "hulk, 4"];
+nodo7[label = "ironman, 5"];
+nodo8[label = "mario, 5"];
+nodo9[label = "tux, 3"];
 nodo0->nodo1;
 nodo1->nodo0;
+nodo1->nodo2;
+nodo2->nodo1;
+nodo2->nodo3;
+nodo3->nodo2;
+nodo3->nodo4;
+nodo4->nodo3;
+nodo4->nodo5;
+nodo5->nodo4;
+nodo5->nodo6;
+nodo6->nodo5;
+nodo6->nodo7;
+nodo7->nodo6;
+nodo7->nodo8;
+nodo8->nodo7;
+nodo8->nodo9;
+nodo9->nodo8;
 }

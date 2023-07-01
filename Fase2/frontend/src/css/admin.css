@@ -1,0 +1,300 @@
+html{
+    height: 100%;
+}
+
+body{
+    overflow: hidden;
+}
+
+.card {
+    width: 900px;
+    height: 600px;
+    position: relative;
+    top: 50px;
+    left: center;
+    margin: 0 auto;
+    background-color: #011522;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.card .card__content .table{
+    color: rgb(243, 243, 236);
+}
+
+.card .card__content h3{
+    position: relative;
+    top: -5px;
+    left: 20px;
+    font-size: 20px;
+    color: #00c297;
+    font-weight: 300;
+    font-family: inherit;
+}
+
+.tools { 
+    display: flex;
+    align-items: center;
+    padding: 9px;
+}
+
+.circle {
+    padding: 0 4px;
+}
+    
+.box {
+    display: inline-block;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    padding: 1px;
+    border-radius: 50%;
+
+}
+
+.red {
+    background-color: #ff605c;
+}
+
+.yellow {
+    background-color: #ffbd44;
+}
+
+.green {
+    background-color: #00ca4e;
+}
+  
+  
+.card .card__content .contenido{
+    position: relative;
+    left: 60px;
+    overflow: scroll;
+    width: 800px;
+    height: 200px;
+}
+  
+.card__content h1{
+    position: absolute;
+    left: 315px;
+    top: 5px;
+    font-size: 30px;
+    color: #00c297;
+    font-weight: 300;
+    font-family: inherit;
+}
+
+.card__content h2{
+    position: relative;
+    left: 150px;
+    height: 15px;
+    font-size: 20px;
+    color: #c0eee4;
+    font-weight: 300;
+    font-family: inherit;
+}
+
+/*codigo del file*/
+.container-input {
+    text-align: center;
+    background: #282828;
+    border-top: 5px solid #c39f77;
+    padding: 15px 0;
+    border-radius: 8px;
+    width: 35%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    margin-right: 0.25em;
+}
+
+.iborrainputfile {
+	font-size:16px; 
+	font-weight:normal;
+	font-family: 'Lato';
+}
+
+/* style 1 */
+
+.inputfile-1 + label {
+    color: #fff;
+    background-color: #c39f77;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    background-color: #9f8465;
+}
+
+
+/*file 2*/
+.inputfile-2 + label {
+    color: #fff;
+    background-color: #c39f77;
+}
+
+.inputfile-2:focus + label,
+.inputfile-2.has-focus + label,
+.inputfile-2 + label:hover {
+    background-color: #9f8465;
+}
+
+/*cerrar sesion del boton*/
+.button {
+    top: 490px;
+    left: 670px;
+    --color: #00A97F;
+    padding: 0.8em 1.7em;
+    background-color: transparent;
+    border-radius: .3em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+    font-weight: 400;
+    font-size: 17px;
+    border: 1px solid;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: var(--color);
+    z-index: 1;
+}
+
+.button::before, .button::after {
+content: '';
+display: block;
+width: 50px;
+height: 50px;
+transform: translate(-50%, -50%);
+position: absolute;
+border-radius: 50%;
+z-index: -1;
+background-color: var(--color);
+transition: 1s ease;
+}
+   
+.button::before {
+top: -1em;
+left: -1em;
+}
+   
+.button::after {
+left: calc(100% + 1em);
+top: calc(100% + 1em);
+}
+   
+.button:hover::before, .button:hover::after {
+height: 410px;
+width: 410px;
+}
+
+.button:hover {
+color: rgb(10, 25, 30);
+}
+
+.button:active {
+filter: brightness(.8);
+}
+
+/*button de reportes*/
+.buttonReporte {
+    top: 420px;
+    left: 370px;
+    --color: #00A97F;
+    padding: 0.8em 1.7em;
+    background-color: transparent;
+    border-radius: .3em;
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+    font-weight: 400;
+    font-size: 17px;
+    border: 1px solid;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: var(--color);
+    z-index: 1;
+}
+
+.buttonReporte::before, .buttonReporte::after {
+content: '';
+display: block;
+width: 50px;
+height: 50px;
+transform: translate(-50%, -50%);
+position: absolute;
+border-radius: 50%;
+z-index: -1;
+background-color: var(--color);
+transition: 1s ease;
+}
+   
+.buttonReporte::before {
+top: -1em;
+left: -1em;
+}
+   
+.buttonReporte::after {
+left: calc(100% + 1em);
+top: calc(100% + 1em);
+}
+   
+.bubuttonReportetton:hover::before, .buttonReporte:hover::after {
+height: 410px;
+width: 410px;
+}
+
+.buttonReporte:hover {
+color: rgb(10, 25, 30);
+}
+
+.buttonReporte:active {
+filter: brightness(.8);
+}
+
+/*div's de pepidos y empleados*/
+.pedidos {
+    position: absolute;
+    left: 50px;
+    top: 100px;
+    width: 800px;
+    height: 150px;
+    
+}
+
+.empleados{
+    position: absolute;
+    left: 50px;
+    top: 250px;
+    width: 800px;
+    height: 150px;
+}

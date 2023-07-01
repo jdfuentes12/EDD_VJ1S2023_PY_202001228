@@ -1,0 +1,8 @@
+digraph MatrizCapa{ 
+ node[shape=box] 
+ rankdir=UD; 
+ {rank=min; 
+nodo00[label="RAIZ" ,rankdir=LR,group=0]; 
+}{rank=same; 
+nodo00[label="RAIZ" ,group=0]; 
+}}

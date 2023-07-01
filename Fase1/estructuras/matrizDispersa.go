@@ -9,6 +9,16 @@ import (
 	"strings"
 )
 
+type NodoMatriz struct {
+	Siguiente *NodoMatriz
+	Anterior  *NodoMatriz
+	Abajo     *NodoMatriz
+	Arriba    *NodoMatriz
+	PosX      int
+	PosY      int
+	Color     string
+}
+
 type Matriz struct {
 	Raiz        *NodoMatriz
 	ImageWidth  int
@@ -151,10 +161,8 @@ func (m *Matriz) Insertar_Elemento(x int, y int, color string) {
 	}
 }
 
-func (m *Matriz) Reporte() {
+func (m *Matriz) Reporte() string {
 	texto := ""
-	nombre_archivo := "graficas/matriz.dot"
-	nombre_imagen := "matriz.jpg"
 	aux1 := m.Raiz
 	aux2 := m.Raiz
 	aux3 := m.Raiz
@@ -199,10 +207,7 @@ func (m *Matriz) Reporte() {
 	} else {
 		texto = "No hay elementos en la matriz"
 	}
-	//fmt.Println(texto)
-	crearArchivo(nombre_archivo)
-	escribirArchivo(texto, nombre_archivo)
-	ejecutar(nombre_imagen, nombre_archivo)
+	return texto
 }
 
 func (m *Matriz) LeerArchivo(ruta string) {
@@ -302,8 +307,7 @@ func (m *Matriz) leerConfig(ruta string) {
 	}
 }
 
-func (m *Matriz) GenerarImagen(nombre_imagen string) {
-	archivoCSS := "csv/" + nombre_imagen + "/" + nombre_imagen + ".css" // csv/mario/mario.css
+func (m *Matriz) GenerarCSS(nombre_imagen string) string {
 	contenidoCSS := "body{\n background: #333333; \n height: 100vh; \n display: flex; \n justify-content: center; \n align-items: center; \n } \n"
 	contenidoCSS += ".canvas{ \n width: " + strconv.Itoa(m.ImageWidth*m.PixelWidth) + "px; \n"
 	contenidoCSS += "height: " + strconv.Itoa(m.ImageHeight*m.PixelHeight) + "px; \n }"
@@ -332,15 +336,10 @@ func (m *Matriz) GenerarImagen(nombre_imagen string) {
 			auxColumna = auxFila.Siguiente
 		}
 	}
-
-	/*FIN*/
-	m.generarHTML(nombre_imagen)
-	crearArchivo(archivoCSS)
-	escribirArchivo(contenidoCSS, archivoCSS)
+	return contenidoCSS
 }
 
-func (m *Matriz) generarHTML(nombre_imagen string) {
-	archivoHTML := "csv/" + nombre_imagen + "/" + nombre_imagen + ".html"
+func (m *Matriz) GenerarHTML(nombre_imagen string) string {
 	contenidoHTML := "<!DOCTYPE html> \n <html> \n <head> \n <link rel=\"stylesheet\"  href=\""
 	contenidoHTML += nombre_imagen + ".css"
 	contenidoHTML += "\" > \n </head> \n <body> \n <div class=\"canvas\"> \n"
@@ -350,6 +349,38 @@ func (m *Matriz) generarHTML(nombre_imagen string) {
 		}
 	}
 	contenidoHTML += "</div> \n </body> \n </html> \n"
-	crearArchivo(archivoHTML)
-	escribirArchivo(contenidoHTML, archivoHTML)
+	return contenidoHTML
+}
+
+func (m *Matriz) GenerarCSSREX(nombre_imagen string) string {
+	contenidoCSS := "body{\n background: #333333; \n height: 100vh; \n display: flex; \n justify-content: center; \n align-items: center; \n } \n"
+	contenidoCSS += ".canvas{ \n width: " + strconv.Itoa(m.ImageWidth*m.PixelWidth) + "px; \n"
+	contenidoCSS += "height: " + strconv.Itoa(m.ImageHeight*m.PixelHeight) + "px; \n }"
+	contenidoCSS += ".pixel{ \n width: " + strconv.Itoa(m.PixelWidth) + "px; \n"
+	contenidoCSS += "height: " + strconv.Itoa(m.PixelHeight) + "px; \n float: left; \n } \n"
+	x_pixel := 0
+	x := m.ImageWidth
+	auxFila := m.Raiz.Abajo
+	auxColumna := auxFila.Siguiente
+
+	//* Nueva Version*//
+	for i := 0; i < m.ImageHeight; i++ {
+		for j := 0; j < m.ImageWidth; j++ {
+			if auxColumna != nil {
+				if auxColumna.PosX == x_pixel {
+					contenidoCSS += ".pixel:nth-child(" + strconv.Itoa(x) + ") { background: rgb(" + strings.ReplaceAll(auxColumna.Color, "-", ",") + "); }\n"
+					auxColumna = auxColumna.Siguiente
+				}
+				x_pixel++
+			}
+			x--
+		}
+		x = m.ImageWidth * (i + 1)
+		x_pixel = 0
+		auxFila = auxFila.Abajo
+		if auxFila != nil {
+			auxColumna = auxFila.Siguiente
+		}
+	}
+	return contenidoCSS
 }

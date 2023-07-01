@@ -1,0 +1,24 @@
+{
+	"pedidos": [
+		{
+			"id_cliente": 1,
+			"imagen": "mario"
+		},
+		{
+			"id_cliente": 2,
+			"imagen": "luigui"
+		},
+		{
+			"id_cliente": 3,
+			"imagen": "bowser"
+		},
+		{
+			"id_cliente": 4,
+			"imagen": "wario"
+		},
+		{
+			"id_cliente": 5,
+			"imagen": "peach"
+		}
+]
+}
