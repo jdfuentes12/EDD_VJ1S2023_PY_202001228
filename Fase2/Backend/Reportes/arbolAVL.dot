@@ -1,9 +1,2 @@
 digraph arbol{ 
-"2" ;
- x1 [label="",width=.1,style=invis];"2" -> "1" ;
-"2" -> "4" ;
- x2 [label="",width=.1,style=invis];"4" -> "3" ;
-"4" -> "5" ;
-{rank=same"3" -> "5" [style=invis]}; 
-{rank=same"1" -> "4" [style=invis]}; 
-}
+"2 - luigui" ; x1 [label="",width=.1,style=invis];"2 - luigui" -> "1 - ave" ;"2 - luigui" -> "4 - wario" ; x2 [label="",width=.1,style=invis];"4 - wario" -> "3 - bowser" ;"4 - wario" -> "5 - peach" ;{rank=same"3 - bowser" -> "5 - peach" [style=invis]}; {rank=same"1 - ave" -> "4 - wario" [style=invis]}; }

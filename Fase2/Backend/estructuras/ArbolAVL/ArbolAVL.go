@@ -111,40 +111,54 @@ func (a *Arbol) retornarValoresArbol(raiz *NodoArbol, indice int) string {
 	if raiz != nil {
 		cadena += "\""
 		cadena += strconv.Itoa(raiz.Valor.Id_Cliente)
-		cadena += "\" ;\n"
+		cadena += " - "
+		cadena += (raiz.Valor.Nombre_Imagen)
+		cadena += "\" ;"
 		if raiz.Izquierda != nil && raiz.Derecha != nil {
 			cadena += " x" + strconv.Itoa(numero) + " [label=\"\",width=.1,style=invis];"
 			cadena += "\""
 			cadena += strconv.Itoa(raiz.Valor.Id_Cliente)
+			cadena += " - "
+			cadena += (raiz.Valor.Nombre_Imagen)
 			cadena += "\" -> "
 			cadena += a.retornarValoresArbol(raiz.Izquierda, numero)
 			cadena += "\""
 			cadena += strconv.Itoa(raiz.Valor.Id_Cliente)
+			cadena += " - "
+			cadena += (raiz.Valor.Nombre_Imagen)
 			cadena += "\" -> "
 			cadena += a.retornarValoresArbol(raiz.Derecha, numero)
-			cadena += "{rank=same" + "\"" + strconv.Itoa(raiz.Izquierda.Valor.Id_Cliente) + "\"" + " -> " + "\"" + strconv.Itoa(raiz.Derecha.Valor.Id_Cliente) + "\"" + " [style=invis]}; \n"
+			cadena += "{rank=same" + "\"" + strconv.Itoa(raiz.Izquierda.Valor.Id_Cliente) + " - " + (raiz.Izquierda.Valor.Nombre_Imagen) + "\"" + " -> " + "\"" + strconv.Itoa(raiz.Derecha.Valor.Id_Cliente) + " - " + (raiz.Derecha.Valor.Nombre_Imagen) + "\"" + " [style=invis]}; "
 		} else if raiz.Izquierda != nil && raiz.Derecha == nil {
-			cadena += " x" + strconv.Itoa(numero) + " [label=\"\",width=.1,style=invis];\n"
+			cadena += " x" + strconv.Itoa(numero) + " [label=\"\",width=.1,style=invis];"
 			cadena += "\""
 			cadena += strconv.Itoa(raiz.Valor.Id_Cliente)
+			cadena += " - "
+			cadena += (raiz.Valor.Nombre_Imagen)
 			cadena += "\" -> "
 			cadena += a.retornarValoresArbol(raiz.Izquierda, numero)
 			cadena += "\""
 			cadena += strconv.Itoa(raiz.Valor.Id_Cliente)
+			cadena += " - "
+			cadena += (raiz.Valor.Nombre_Imagen)
 			cadena += "\" -> "
 			cadena += "x" + strconv.Itoa(numero) + "[style=invis]"
-			cadena += "{rank=same" + "\"" + strconv.Itoa(raiz.Izquierda.Valor.Id_Cliente) + "\"" + " -> " + "x" + strconv.Itoa(numero) + " [style=invis]}; \n"
+			cadena += "{rank=same" + "\"" + strconv.Itoa(raiz.Izquierda.Valor.Id_Cliente) + " - " + (raiz.Izquierda.Valor.Nombre_Imagen) + "\"" + " -> " + "x" + strconv.Itoa(numero) + " [style=invis]}; "
 		} else if raiz.Izquierda == nil && raiz.Derecha != nil {
 			cadena += " x" + strconv.Itoa(numero) + " [label=\"\",width=.1,style=invis];"
 			cadena += "\""
 			cadena += strconv.Itoa(raiz.Valor.Id_Cliente)
+			cadena += " - "
+			cadena += (raiz.Valor.Nombre_Imagen)
 			cadena += "\" -> "
 			cadena += "x" + strconv.Itoa(numero) + "[style=invis]"
-			cadena += "; \n \""
+			cadena += "; \""
 			cadena += strconv.Itoa(raiz.Valor.Id_Cliente)
+			cadena += " - "
+			cadena += (raiz.Valor.Nombre_Imagen)
 			cadena += "\" -> "
 			cadena += a.retornarValoresArbol(raiz.Derecha, numero)
-			cadena += "{rank=same" + " x" + strconv.Itoa(numero) + " -> \"" + strconv.Itoa(raiz.Derecha.Valor.Id_Cliente) + "\"" + " [style=invis]}; \n"
+			cadena += "{rank=same" + " x" + strconv.Itoa(numero) + " -> \"" + strconv.Itoa(raiz.Derecha.Valor.Id_Cliente) + " - " + (raiz.Derecha.Valor.Nombre_Imagen) + "\"" + " [style=invis]}; "
 		}
 	}
 	return cadena

@@ -50,7 +50,7 @@ func main() {
 		var usuario Peticiones.Login
 		c.BodyParser(&usuario)
 		fmt.Println(usuario)
-		if usuario.Username == "admin" && usuario.Password == "admin" {
+		if usuario.Username == "ADMIN_202001228" && usuario.Password == "admin" {
 			return c.JSON(&fiber.Map{
 				"status": 400,
 			})
