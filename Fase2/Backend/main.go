@@ -163,6 +163,7 @@ func main() {
 		return c.JSON(&fiber.Map{
 			"datos": Cola.Inicio.Pedido,
 		})
+
 	})
 
 	app.Post("/generarFactura", func(c *fiber.Ctx) error {

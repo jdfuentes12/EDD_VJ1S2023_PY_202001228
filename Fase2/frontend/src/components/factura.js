@@ -46,14 +46,7 @@ export const Factura = () => {
 
     const validar = (data) => {
         var idcliente = data.datos.IdCliente
-        console.log(cliente)
-        if (idcliente == null) {
-            idcliente = 0
-            alert("No hay pedidos pendientes")
-        }else{
-            setCliente(idcliente.toString());
-        }
-
+        setCliente(idcliente.toString());
     }
 
     const salir = (e) => {
