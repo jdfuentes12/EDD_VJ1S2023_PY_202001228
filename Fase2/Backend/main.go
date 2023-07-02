@@ -175,7 +175,7 @@ func main() {
 		MatrizFiltro = &Matriz.Matriz{Raiz: &Matriz.NodoMatriz{PosX: -1, PosY: -1, Color: "Raiz"}}
 		Cola.Desencolar()
 		return c.JSON(&fiber.Map{
-			"dato": FacturasRealizadas.Bloques_Creados,
+			"status": 200,
 		})
 	})
 

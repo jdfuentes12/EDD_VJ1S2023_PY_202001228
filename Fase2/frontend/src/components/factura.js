@@ -20,7 +20,6 @@ export const Factura = () => {
 
     const generar = (e) => {
         e.preventDefault();
-        console.log(fecha, " ",idEmpleado," ", cliente," ", pago);
         fetch('http://localhost:3001/generarFactura', {
             method: 'POST',
             body: JSON.stringify({
@@ -34,13 +33,27 @@ export const Factura = () => {
             }
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => mensaje(data))
     }
     
+    const mensaje = (data) => {
+        if (data.status == 200) {
+            alert("Factura generada")
+            window.open("/empleado", "_self")
+        }
+    }
+
 
     const validar = (data) => {
         var idcliente = data.datos.IdCliente
-        setCliente(idcliente.toString());
+        console.log(cliente)
+        if (idcliente == null) {
+            idcliente = 0
+            alert("No hay pedidos pendientes")
+        }else{
+            setCliente(idcliente.toString());
+        }
+
     }
 
     const salir = (e) => {
@@ -62,7 +75,7 @@ export const Factura = () => {
                             <label>Empleado Cobrado</label> <p></p>
                             <input value={idEmpleado} disabled className="input" name="text" type="text"/>
                             <br/><br/>
-                            <label>Usuario</label> <p></p>
+                            <label>Cliente</label> <p></p>
                             <input value={cliente} disabled className="input" name="text" type="text"/>
                             <br/><br/>
                             <label>Pago</label> <p></p>
