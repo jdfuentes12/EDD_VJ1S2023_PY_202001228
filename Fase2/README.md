@@ -49,14 +49,16 @@ Se mostrara una pequeña parte de la insercion a la matriz dependiendo del caso 
 ## *Manual Usuario*
 Le damos la bievenida al sistema por medio de una pagina web en donde se podra iniciar sesion tanto como empleado y administrador.<br>
 ### Administrador
+Aca es para iniciar sesion, despues de hacer la carga masiva que se mostrara adelante ya pueden iniciar sesion como empleado.<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/bfbd1118-4c1b-4ba4-8f9b-31549063b41a" width="450"><br>
-
+Inicio de sesion como administrador, aca podra cargar los archivos para los pedidos (json) y empleados (cvs). <br>
+Al cargar el pedidos se generar una alerta diciendo que fue satisfactoria la carga.<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/5474fc0b-d25a-4707-9451-04a24b0cb8b8" width="450"><br>
-
+Al cargar el empleados se generar una alerta diciendo que fue satisfactoria la carga.<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/0dd4f628-1a61-43f4-8a69-2d1976535ebb" width="450"><br>
-
+Pagina de reportes<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/b81908d9-f0ae-45ff-bb10-7135b0335a86" width="450"><br>
-
+Si le damos en generar AVL nos reemplazara la imagen que estaba con la del avl<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/c98c2d72-e540-4a17-9914-f4889dd43bc2" width="450"><br>
 
 ### Empleado
