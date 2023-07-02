@@ -60,6 +60,10 @@ Pagina de reportes<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/b81908d9-f0ae-45ff-bb10-7135b0335a86" width="450"><br>
 Si le damos en generar AVL nos reemplazara la imagen que estaba con la del avl<br>
 <img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/c98c2d72-e540-4a17-9914-f4889dd43bc2" width="450"><br>
+Si le damos en generar grafo nos reemplazara la imagen que estaba con la del avl<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/0bab53ee-5563-464b-8a01-5618142babc5" width="450"><br>
+
+
 
 ### Empleado
 Menu Empleado<br>
