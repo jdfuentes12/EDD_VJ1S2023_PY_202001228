@@ -202,6 +202,7 @@ func main() {
 		MatrizFiltro = &Matriz.Matriz{Raiz: &Matriz.NodoMatriz{PosX: -1, PosY: -1, Color: "Raiz"}}
 		GenerarGrafo.InsertarValores(EmpleadoLogeado, strconv.Itoa(Cola.Inicio.Pedido.IdCliente), Cola.Inicio.Pedido.NombreImagen, FiltrosColocados)
 		FacturasRealizadas.ReporteBlockChain()
+		FiltrosColocados = ""
 		GenerarGrafo.Reporte()
 
 		Cola.Desencolar()

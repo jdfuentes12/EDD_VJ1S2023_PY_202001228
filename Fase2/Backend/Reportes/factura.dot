@@ -1,3 +1,5 @@
 digraph G{
 nodo0[label="0"];
+nodo1[label="1"];
+nodo0-> nodo1;
 }
