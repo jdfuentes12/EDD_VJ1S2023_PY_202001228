@@ -120,12 +120,6 @@ func (m *Matriz) Insertar_Elemento(x int, y int, color string) {
 	nuevoNodo := &NodoMatriz{PosX: x, PosY: y, Color: color}
 	nodoColumna := m.buscarC(x)
 	nodoFila := m.buscarF(y)
-	/*
-		1. Columna y Fila no Existe
-		2. Columna si existe pero Fila no
-		3. Fila si existe pero Columna no
-		4. Ambos existen
-	*/
 
 	if nodoColumna == nil && nodoFila == nil {
 		nodoColumna = m.nuevaColumna(x)
@@ -203,7 +197,6 @@ func (m *Matriz) Reporte() {
 }
 
 func (m *Matriz) LeerArchivo(ruta string) {
-	//listaAux := &ListaCircular{Inicio: nil, Longitud: 0}
 	file, err := os.Open(ruta)
 	if err != nil {
 		fmt.Println("No pude abrir el archivo")
@@ -260,7 +253,7 @@ func (m *Matriz) LeerInicial(ruta string, imagen string) {
 			continue
 		}
 		if linea[0] == "0" {
-			m.leerConfig("csv/" + imagen + "/" + linea[1]) /*csv/mario/config.csv*/
+			m.leerConfig("csv/" + imagen + "/" + linea[1])
 		} else {
 			m.LeerArchivo("csv/" + imagen + "/" + linea[1])
 		}

@@ -1,6 +1,7 @@
 package Facturas
 
 import (
+	"Fase2/estructuras/GenerarArchivos"
 	"Fase2/estructuras/TablaHash"
 	"crypto/sha256"
 	"encoding/hex"
@@ -64,4 +65,29 @@ func (b *BlockChain) InsertarTabla(tabla *TablaHash.TablaHash, idEmpleado string
 		}
 		aux = aux.Siguiente
 	}
+}
+
+func (b *BlockChain) ReporteBlockChain() {
+	nombre_archivo := "./Reportes/factura.dot"
+	nombre_imagen := "./Reportes/factura.jpg"
+	contenido := "digraph G{\n"
+	contador := 0
+	aux := b.Inicio
+
+	if aux != nil {
+		for aux != nil {
+			contenido += "nodo" + strconv.Itoa(contador) + "[label=\"" + aux.Bloque["index"] + "\"];\n"
+			contador++
+			aux = aux.Siguiente
+		}
+		for i := 0; i < contador-1; i++ {
+			contenido += "nodo" + strconv.Itoa(i) + "-> nodo" + strconv.Itoa(i+1) + ";\n"
+		}
+	} else {
+		contenido += "nodo0[label=\"Bloque Vacio\"];\n"
+	}
+	contenido += "}"
+	GenerarArchivos.CrearArchivo(nombre_archivo)
+	GenerarArchivos.EscribirArchivo(contenido, nombre_archivo)
+	GenerarArchivos.Ejecutar(nombre_imagen, nombre_archivo)
 }

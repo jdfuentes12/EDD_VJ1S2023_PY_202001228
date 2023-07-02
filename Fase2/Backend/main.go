@@ -8,10 +8,12 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 
 	"Fase2/estructuras/ArbolAVL"
 	"Fase2/estructuras/ColaPedidos"
 	"Fase2/estructuras/Facturas"
+	"Fase2/estructuras/Grafo"
 	"Fase2/estructuras/Lista"
 	"Fase2/estructuras/Matriz"
 	"Fase2/estructuras/Peticiones"
@@ -30,6 +32,7 @@ var FacturasRealizadas *Facturas.BlockChain
 var VerFacturasRealizadas *TablaHash.TablaHash
 var FiltrosColocados string
 var EmpleadoLogeado string
+var GenerarGrafo *Grafo.Grafo
 
 func main() {
 	//Inicializacion de estructuras
@@ -39,6 +42,7 @@ func main() {
 	Cola = &ColaPedidos.ListaCola{Inicio: nil, Longitud: 0}
 	FacturasRealizadas = &Facturas.BlockChain{Bloques_Creados: 0}
 	VerFacturasRealizadas = &TablaHash.TablaHash{Capacidad: 5, Utilizacion: 0}
+	GenerarGrafo = &Grafo.Grafo{Principal: nil}
 	FiltrosColocados = ""
 	EmpleadoLogeado = ""
 
@@ -114,6 +118,23 @@ func main() {
 		})
 	})
 
+	app.Get("/reportegrafo", func(c *fiber.Ctx) error {
+		var imagen Peticiones.RespuestaImagen = Peticiones.RespuestaImagen{Nombre: "Reportes/grafo.jpg"}
+
+		imageByte, err := ioutil.ReadFile(imagen.Nombre)
+		if err != nil {
+			return c.JSON(&fiber.Map{
+				"status": 404,
+			})
+		}
+		//codificar a base64
+		imagen.ImagenBase64 = "data:image/jpg;base64," + base64.StdEncoding.EncodeToString(imageByte)
+		return c.JSON(&fiber.Map{
+			"status": 200,
+			"imagen": imagen,
+		})
+	})
+
 	app.Post("/aplicarfiltro", func(c *fiber.Ctx) error {
 		var tipo Peticiones.PeticionFiltro
 		MatrizFiltro = &Matriz.Matriz{Raiz: &Matriz.NodoMatriz{PosX: -1, PosY: -1, Color: "Raiz"}}
@@ -123,12 +144,14 @@ func main() {
 		if tipo.Tipo == 1 {
 			MatrizFiltro.LeerInicial("csv/"+tipo.Nombre_Imagen+"/inicial.csv", tipo.Nombre_Imagen)
 			MatrizFiltro.Negativo(tipo.Nombre_Imagen + "Negativo")
+			FiltrosColocados += "Negativo, "
 			return c.JSON(&fiber.Map{
 				"status": 200,
 			})
 		} else if tipo.Tipo == 2 {
 			MatrizFiltro.LeerInicial("csv/"+tipo.Nombre_Imagen+"/inicial.csv", tipo.Nombre_Imagen)
 			MatrizFiltro.EscalaGrises(tipo.Nombre_Imagen + "Gris")
+			FiltrosColocados += "Grises, "
 			return c.JSON(&fiber.Map{
 				"status": 200,
 			})
@@ -136,6 +159,7 @@ func main() {
 			MatrizFiltro.LeerInicial("csv/"+tipo.Nombre_Imagen+"/inicial.csv", tipo.Nombre_Imagen)
 			MatrizFiltro.RotacionX()
 			MatrizFiltro.GenerarImagen(tipo.Nombre_Imagen + "RX")
+			FiltrosColocados += "Eje X, "
 			return c.JSON(&fiber.Map{
 				"status": 200,
 			})
@@ -143,6 +167,7 @@ func main() {
 			MatrizFiltro.LeerInicial("csv/"+tipo.Nombre_Imagen+"/inicial.csv", tipo.Nombre_Imagen)
 			MatrizFiltro.RotacionY()
 			MatrizFiltro.GenerarImagen(tipo.Nombre_Imagen + "RY")
+			FiltrosColocados += "Eje Y, "
 			return c.JSON(&fiber.Map{
 				"status": 200,
 			})
@@ -150,6 +175,7 @@ func main() {
 			MatrizFiltro.LeerInicial("csv/"+tipo.Nombre_Imagen+"/inicial.csv", tipo.Nombre_Imagen)
 			MatrizFiltro.RotacionDoble()
 			MatrizFiltro.GenerarImagen(tipo.Nombre_Imagen + "RD")
+			FiltrosColocados += "Doble, "
 			return c.JSON(&fiber.Map{
 				"status": 200,
 			})
@@ -174,6 +200,10 @@ func main() {
 		FacturasRealizadas.InsertarTabla(VerFacturasRealizadas, EmpleadoLogeado)
 		MatrizOriginal = &Matriz.Matriz{Raiz: &Matriz.NodoMatriz{PosX: -1, PosY: -1, Color: "Raiz"}}
 		MatrizFiltro = &Matriz.Matriz{Raiz: &Matriz.NodoMatriz{PosX: -1, PosY: -1, Color: "Raiz"}}
+		GenerarGrafo.InsertarValores(EmpleadoLogeado, strconv.Itoa(Cola.Inicio.Pedido.IdCliente), Cola.Inicio.Pedido.NombreImagen, FiltrosColocados)
+		FacturasRealizadas.ReporteBlockChain()
+		GenerarGrafo.Reporte()
+
 		Cola.Desencolar()
 		return c.JSON(&fiber.Map{
 			"status": 200,

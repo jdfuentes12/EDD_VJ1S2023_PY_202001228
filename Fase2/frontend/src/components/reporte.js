@@ -11,14 +11,20 @@ export const Reportes = () => {
         .then(data => validar(data))
     }
 
+    const reporteGRafo = async (e) => {
+        e.preventDefault();
+        fetch('http://localhost:3001/reportegrafo', {})
+        .then(response => response.json())
+        .then(data => validar(data))
+    }
+
     const validar = (data) => {
         console.log(data)
         if (data.status === 404){
-            alert("El arbol no contiene ningun dato");
+            alert("No hay ninguna imagen disponible");
         }else if (data.status === 200){
             setImagen(data.imagen.ImagenBase64)
         }
-        
     }
 
     const salir = (e) => {
@@ -27,12 +33,14 @@ export const Reportes = () => {
         window.open("/admin", "_self")
     }
 
+
+
     return(
         <div>
             <div className="content">
                 <h1>Reportes</h1>
                 <div className="botones">
-                    <button>Grafo</button>
+                    <button onClick={reporteGRafo}>Grafo</button>
                     <br></br><br></br><br></br>
                     <button onClick={reporteArbol}>Arbol AVL</button>
                     <br></br><br></br><br></br>
