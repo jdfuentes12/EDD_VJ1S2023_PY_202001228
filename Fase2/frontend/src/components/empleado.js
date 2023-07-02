@@ -8,21 +8,37 @@ export const Empleado = () => {
         window.open("/", "_self")
     }
 
+    const verFatura = (e) => {
+        e.preventDefault();
+        console.log("Reportes");
+        window.open("/verfactura", "_self")
+    }
+
+    const filtros = (e) => {
+        e.preventDefault();
+        window.open("/filtros", "_self")
+    }
+
+    const factura = (e) => {
+        e.preventDefault();
+        window.open("/factura", "_self")
+    }
+
     return(
         <div>
             <div>
                 <nav>
-                    <label  className="logo">Dashboard Empleado</label>
+                    <label  className="logo">Empleado</label>
                     <label  className="empleado">{localStorage.getItem("empleado")}</label>
                 </nav>
             </div>
             <div className="botones">
                 <form>
-                    <center><button>Aplicacion de Filtros</button></center>
+                    <center><button onClick={filtros}>Aplicacion de Filtros</button></center>
                     <br/>
-                    <center><button>Generar Facturas</button></center>
+                    <center><button onClick={factura}>Generar Facturas</button></center>
                     <br/>
-                    <center><button>Ver Facturas</button></center>
+                    <center><button onClick={verFatura}>Ver Facturas</button></center>
                     <br/>
                     <center><button onClick={salir}>Cerrar Sesion</button></center>
                 </form>

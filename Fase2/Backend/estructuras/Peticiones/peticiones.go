@@ -22,3 +22,15 @@ type RespuestaImagen struct {
 	ImagenBase64 string
 	Nombre       string
 }
+
+type PeticionFiltro struct {
+	Tipo          int
+	Nombre_Imagen string
+}
+
+type BloquePeticion struct {
+	Timestamp string
+	Biller    string
+	Customer  string
+	Payment   string
+}

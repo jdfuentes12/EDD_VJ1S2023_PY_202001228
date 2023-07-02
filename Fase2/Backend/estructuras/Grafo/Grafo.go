@@ -1,0 +1,122 @@
+package Grafo
+
+import (
+	"Fase2/estructuras/GenerarArchivos"
+	"strconv"
+)
+
+type Grafo struct {
+	Principal *NodoMatrizDeAdyacencia
+}
+
+func (g *Grafo) insertarC(padre string, hijo string, filtro string) { // cliente, imagen
+	nuevoNodo := &NodoMatrizDeAdyacencia{Valor: hijo}
+	if g.Principal != nil && padre == g.Principal.Valor {
+		aux := g.Principal
+		for aux.Siguiente != nil {
+			aux = aux.Siguiente
+		}
+		aux.Siguiente = nuevoNodo
+	} else {
+		g.insertarF(padre)
+		aux := g.Principal
+		for aux != nil {
+			if aux.Valor == padre {
+				break
+			}
+			aux = aux.Abajo
+		}
+		if aux != nil {
+			nuevoNodo.Siguiente = &NodoMatrizDeAdyacencia{Valor: filtro}
+			aux.Siguiente = nuevoNodo
+		}
+	}
+}
+
+func (g *Grafo) insertarF(padre string) {
+	nuevoNodo := &NodoMatrizDeAdyacencia{Valor: padre}
+	if g.Principal == nil {
+		g.Principal = nuevoNodo
+	} else {
+		aux := g.Principal
+		for aux.Abajo != nil {
+			if aux.Valor == padre {
+				return
+			}
+			aux = aux.Abajo
+		}
+		aux.Abajo = nuevoNodo
+	}
+}
+
+func (g *Grafo) InsertarValores(padre string, cliente string, imagen string, filtros string) {
+	if g.Principal == nil {
+		g.insertarF(padre)
+		g.insertarC(padre, cliente, "")
+		g.insertarC(cliente, imagen, filtros)
+	} else {
+		g.insertarC(padre, cliente, "")
+		g.insertarC(cliente, imagen, filtros)
+	}
+}
+
+func (g *Grafo) Reporte() {
+	cadena := ""
+	nombre_archivo := "./Reporte/grafo.dot"
+	nombre_imagen := "./Reporte/grafo.jpg"
+	if g.Principal != nil {
+		cadena += "graph grafoDirigido{ \n rankdir=LR; \n node [shape=box]; layout=neato; \n nodo00[label=\"" + g.Principal.Valor + "\"]; \n"
+		cadena += "node [shape = ellipse]; \n"
+		cadena += g.retornarValoresMatriz()
+		cadena += "\n}"
+	}
+	GenerarArchivos.CrearArchivo(nombre_archivo)
+	GenerarArchivos.EscribirArchivo(cadena, nombre_archivo)
+	GenerarArchivos.Ejecutar(nombre_imagen, nombre_archivo)
+}
+
+func (g *Grafo) retornarValoresMatriz() string {
+	cadena := ""
+	x := 0
+	y := 1
+	/*CREACION DE NODOS*/
+	aux := g.Principal.Abajo //Filas
+	aux1 := aux              //Columnas
+	/*CREACION DE NODOS CON LABELS*/
+	for aux != nil {
+		for aux1 != nil {
+			cadena += "nodo" + strconv.Itoa(x) + strconv.Itoa(y) + "[label=\"" + aux1.Valor + "\" ]; \n"
+			aux1 = aux1.Siguiente
+			x++
+		}
+		if aux != nil {
+			aux = aux.Abajo
+			aux1 = aux
+		}
+		x = 0
+		y++
+	}
+
+	/*CONEXION DE NODOS*/
+	x = 0
+	y = 1
+	aux = g.Principal.Abajo //Filas
+	aux1 = aux              //Columnas
+	/*CREACION DE NODOS CON LABELS*/
+	for aux != nil {
+		if aux1 != nil {
+			cadena += "nodo00 -- "
+			cadena += "nodo" + strconv.Itoa(x) + strconv.Itoa(y) + " -- "
+			cadena += "nodo" + strconv.Itoa(x+1) + strconv.Itoa(y) + " -- "
+			cadena += "nodo" + strconv.Itoa(x+2) + strconv.Itoa(y) + "[len=1.00]; \n"
+		}
+		if aux != nil {
+			aux = aux.Abajo
+			aux1 = aux
+		}
+		x = 0
+		y++
+	}
+
+	return cadena
+}

@@ -13,7 +13,12 @@ export const Reportes = () => {
 
     const validar = (data) => {
         console.log(data)
-        setImagen(data.imagen.ImagenBase64)
+        if (data.status === 404){
+            alert("El arbol no contiene ningun dato");
+        }else if (data.status === 200){
+            setImagen(data.imagen.ImagenBase64)
+        }
+        
     }
 
     const salir = (e) => {
@@ -33,7 +38,7 @@ export const Reportes = () => {
                     <br></br><br></br><br></br>
                     <button>Facturas</button>
                     <br></br><br></br><br></br>
-                    <button onClick={salir}>Salir</button>
+                    <button onClick={salir}>Regresar</button>
                 </div> 
             </div>
             <div className="imagen">

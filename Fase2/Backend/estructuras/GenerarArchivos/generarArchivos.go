@@ -33,7 +33,6 @@ func EscribirArchivo(contenido string, nombre_archivo string) {
 	if err != nil {
 		return
 	}
-	//fmt.Println("Archivo guardado correctamente")
 }
 
 func Ejecutar(nombre_imagen string, archivo string) {

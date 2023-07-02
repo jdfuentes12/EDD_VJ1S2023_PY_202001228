@@ -1,11 +1,13 @@
 h1{
   position: absolute;
+  color: #ffffff;
   top: 10px;
   left: 50px;
 }
 
 h3{
   position: absolute;
+  color: azure;
   top: 75px;
   left: 400px;
 }

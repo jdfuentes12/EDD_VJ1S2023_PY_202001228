@@ -42,12 +42,13 @@ export const Administrador = () => {
     }
     
     const validar = (data) => {
+        console.log(data);
         console.log(data.status);
-        if (data.status === "error"){
-            alert("Error al cargar archivo");
-        } else if (data.status === 200){
-            alert("Carga de archivo exitosamente");
-        }else if (data.status === 404){
+        if (data.status === 200){
+            alert("Carga de pedidos exitosamente");
+        } else if (data.status === 201){
+            alert("Carga de empleados exitosamente");
+        } else if (data.status === 404){
             alert("Error al generar la imagen");
         }
     }
