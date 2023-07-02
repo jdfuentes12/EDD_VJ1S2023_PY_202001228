@@ -62,8 +62,8 @@ func (g *Grafo) InsertarValores(padre string, cliente string, imagen string, fil
 
 func (g *Grafo) Reporte() {
 	cadena := ""
-	nombre_archivo := "./Reporte/grafo.dot"
-	nombre_imagen := "./Reporte/grafo.jpg"
+	nombre_archivo := "./Reportes/grafo.dot"
+	nombre_imagen := "./Reportes/grafo.jpg"
 	if g.Principal != nil {
 		cadena += "graph grafoDirigido{ \n rankdir=LR; \n node [shape=box]; layout=neato; \n nodo00[label=\"" + g.Principal.Valor + "\"]; \n"
 		cadena += "node [shape = ellipse]; \n"
