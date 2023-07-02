@@ -47,19 +47,45 @@ Se mostrara una pequeña parte de la insercion a la matriz dependiendo del caso 
 
 
 ## *Manual Usuario*
-EDD Creative es un programa que se usara para generar imagenes pixeles. Con el objetivo de que se genere la imagen en un documetno html y con su respectivo css.
+Le damos la bievenida al sistema por medio de una pagina web en donde se podra iniciar sesion tanto como empleado y administrador.<br>
+### Administrador
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/bfbd1118-4c1b-4ba4-8f9b-31549063b41a" width="450"><br>
+
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/5474fc0b-d25a-4707-9451-04a24b0cb8b8" width="450"><br>
+
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/0dd4f628-1a61-43f4-8a69-2d1976535ebb" width="450"><br>
+
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/b81908d9-f0ae-45ff-bb10-7135b0335a86" width="450"><br>
+
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/c98c2d72-e540-4a17-9914-f4889dd43bc2" width="450"><br>
+
+### Empleado
+Menu Empleado<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/0318e842-cfa6-4ae8-9d82-c0847d431790" width="450"><br>
+Aplicar filtros<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/4c02e943-2312-4d3b-9a5f-56239cb4e617" width="450"><br>
+
+Elegir filtro<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/df72ade3-2a55-403a-b468-64cafdf2cff7" width="450"><br>
+
+Imagen con filtro<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/de463526-2312-474f-b93b-6f22ab68b211" width="450"><br>
+
+imagen generada<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/09267092-dbf9-468a-a872-3886c0d984d1" width="450"><br>
+
+Generar Factura<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/7b162a6b-7064-440f-89c9-dfa6f9474b93" width="450"><br>
+
 <br>
-A la hora de correr el programa se mostrara un menu para iniciar Sesion o salir de la aplicacion. <br>
-Nota: este menu solo permitira iniciar en modo administrador, mas adelante se permitira para los empleados que esten en el sistema.<br>
-<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6635d4f0-6f72-4282-8cd4-f3cd1a900892" width="350"><br>
-Para poder acceder al modo administrador se usa el usuario "admin_202001228" y la contraseña es "admin" y el cual generara el menu administrado y las acciones que se pueden hacer.<br>
-<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/6afd7d63-1cfe-4c1c-ba02-4660c17a321d" width="350"><br>
-A la  hora de elegir cualquiera de las primeras 4 opciones le pedira la ruta del archivo para cargarlo en el sistema y poder hacer las operaciones necesarias y almacenarlos en la estructura. <br>
-<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/8fc46aa7-39f0-49ff-b755-c3ae160bf601" width="350"><br>
-Y si se quiere ver el reporte de todas las estructuras que se encuentran en el sistema se elige el numero "5" el cual generara todos los reportes de cada una de las estructuras.<br>
-<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/0810b536-e940-432f-a695-08ca9a2c7b62" width="350"><br>
-Al salir del menu administrador se le desplegara otro menu, donde podra elegir si quiere seguir como administrado o entrar como empleado al sistema. <br>
-<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/f1a6447e-eb75-492f-b028-0a029ba41da1" width="350"><br>
-Si elegimos la opccion de entrar como un usuario, nos pedira  nuestras credenciales, las cueales tenemos que colocar. Si no son correctas repetira el proceso y si son correctas entrará al sistema. <br>
-<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/9fde338d-3dde-444c-a88b-5f699c1e9468" width="350"><br>
-Como se puede ver en la imagen anterior solo tiene 3 opciones.  Podra observar las imagenes disponibles en el sistema o puede proceder a atender al cliente que se encuentra en la cola.
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/f8f0cd31-eab2-494c-b1cd-0d8732dfe2ac" width="450"><br>
+
+Ver facturas<br>
+<img align='center' src="https://github.com/jdfuentes12/EDD_VJ1S2023_PY_202001228/assets/88565998/9d8335ea-367a-4239-9cfe-af68d73a9b22" width="450"><br>
+
+
+
+
+
+
+
