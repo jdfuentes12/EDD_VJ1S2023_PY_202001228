@@ -1,15 +1,27 @@
 graph grafoDirigido{ 
  rankdir=LR; 
  node [shape=box]; layout=neato; 
- nodo00[label="4269"]; 
+ nodo00[label="5052"]; 
 node [shape = ellipse]; 
 nodo01[label="2480" ]; 
 nodo11[label="corrin" ]; 
-nodo21[label="Eje Y, Grises, Negativo, " ]; 
+nodo21[label="Grises, Grises, " ]; 
 nodo02[label="3589" ]; 
 nodo12[label="letra_r" ]; 
-nodo22[label="Eje Y, Grises, Negativo, Eje X, Negativo, " ]; 
+nodo22[label="Doble, " ]; 
+nodo03[label="4575" ]; 
+nodo13[label="letra_r" ]; 
+nodo23[label="Eje X, Eje X, " ]; 
+nodo04[label="4983" ]; 
+nodo14[label="mario" ]; 
+nodo24[label="Negativo, " ]; 
+nodo05[label="5030" ]; 
+nodo15[label="mario" ]; 
+nodo25[label="Eje Y, " ]; 
 nodo00 -- nodo01 -- nodo11 -- nodo21[len=1.00]; 
 nodo00 -- nodo02 -- nodo12 -- nodo22[len=1.00]; 
+nodo00 -- nodo03 -- nodo13 -- nodo23[len=1.00]; 
+nodo00 -- nodo04 -- nodo14 -- nodo24[len=1.00]; 
+nodo00 -- nodo05 -- nodo15 -- nodo25[len=1.00]; 
 
 }
